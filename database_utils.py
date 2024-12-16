@@ -45,6 +45,27 @@ class DatabaseConnector():
         for table in tables:
             print(table)
         return tables
+    
+    def upload_to_db(self, df, tableName):
+        # Define your connection details
+        DATABASE_TYPE = 'postgresql'
+        DBAPI = 'psycopg2'
+        HOST = 'localhost'
+        USER = 'postgres'
+        PASSWORD = 'kingsley'
+        DATABASE = 'sales_data'
+        PORT = 5432
+        engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
+
+        df.to_sql(
+            name=tableName,      # Name of the new table
+            con=engine,                # SQLAlchemy engine
+            if_exists='replace',       # Options: 'fail', 'replace', 'append'
+            index=False                # Do not write the DataFrame index as a column
+        )
+
+        print("DataFrame saved to PostgreSQL.")
+        
 
 if __name__ == '__main__':
     
