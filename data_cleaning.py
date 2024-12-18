@@ -69,4 +69,54 @@ class  DataCleaning():
         dfsd["staff_numbers"] = dfsd["staff_numbers"].str.replace(r"[^\d]", "", regex=True)
 
         return dfsd
+    
+    #clean product details
+    def convert_product_weights(self, dfpd):
+        
+        #drop data with invalid category
+        valid_codes = ["toys-and-games", "pets", "homeware", "sports-and-leisure", "health-and-beauty", "food-and-drink", "diy"]
+        dfpd = dfpd[dfpd['category'].isin(valid_codes)]
+        #print(dfpd.shape)
+        
+        # convert weights
+
+        dfpd["weight"] = dfpd["weight"].apply(self.convert_to_kg)
+        return dfpd
+
+    def convert_to_kg(self, weight):
+        weight = weight.rstrip(".") # strip full stop
+        if "kg" in weight:
+            return float(weight.replace("kg",""))
+        elif "g" in weight:
+            weight = weight.replace("g","")
+            if "x" in weight:
+                val = weight.split("x") # split to list
+                weight = int(val[0]) * int(val[1]) # multiply values
+            return float(weight)/1000
+        elif "ml" in weight:
+            return float(weight.replace("ml",""))/1000
+    
+    def clean_orders_data(self,dfpo):
+        # remove unwanted columns
+        dfpo.drop(columns=["first_name", "last_name", "1"], inplace = True)
+
+        return dfpo
+    
+    def clean_date_events(self,dfde):
+        #drop data with invalid time_period
+        valid_codes = ["Evening","Morning","Midday","Late_Hours"]
+        dfde = dfde[dfde['time_period'].isin(valid_codes)]
+
+        #print(dfde.shape)
+
+        #convert day month year into numeric values
+
+        dfde["day"] = pd.to_numeric(dfde["day"], errors="coerce")
+        dfde["month"] = pd.to_numeric(dfde["month"], errors="coerce")
+        dfde["year"] = pd.to_numeric(dfde["year"], errors="coerce")
+
+        return dfde
+        
+
+
 

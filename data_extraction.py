@@ -6,7 +6,8 @@ import numpy as np
 from datetime import datetime
 import tabula
 import requests
-
+import boto3
+from io import StringIO
 
 class DataExtractor():
     def __init__(self):        
@@ -43,6 +44,25 @@ class DataExtractor():
                 storeData.append(response.json())
         df = pd.DataFrame(storeData)
         return df
+    
+    def extract_from_s3(self, bucket, key, s3Type):
+        s3 = boto3.client('s3')
+        if s3Type == "csv":
+            csv_obj = s3.get_object(Bucket=bucket, Key=key)
+            csv_data = csv_obj['Body'].read().decode('utf-8')
+            df = pd.read_csv(StringIO(csv_data))
+        elif s3Type == "json":
+            # Create an S3 client
+            s3 = boto3.client("s3", region_name="eu-west-1")
+
+            # Download the JSON file as a string
+            json_obj = s3.get_object(Bucket=bucket, Key=key)
+            json_data = json_obj["Body"].read().decode("utf-8")
+
+            # Load the JSON data into a Pandas DataFrame
+            df = pd.read_json(StringIO(json_data))
+        return df
+    
 
 
 dbconnector = DatabaseConnector('db_creds.yaml')
@@ -53,6 +73,7 @@ extractor = DataExtractor()
 df = extractor.read_rds_table(dbconnector, "legacy_users")
 
 cleaning = DataCleaning()
+
 #clean users
 df = cleaning.clean_user_data(df)
 
@@ -87,7 +108,60 @@ dfsd = extractor.retrieve_stores_data(retrieve, stores["number_stores"])
 # Clean Stores data
 dfsd = cleaning.called_clean_store_data(dfsd)
 
-dfsd.to_csv('stores.csv', index=False)
+#dfsd.to_csv('stores.csv', index=False)
 
 #upload store data
 dbconnector.upload_to_db(dfsd, "dim_store_details")
+
+#product details s3
+# Bucket is data-handling-public
+# Key is products.csv
+s3Type = "csv"
+bucket = "data-handling-public"
+key = "products.csv"
+
+#Retrieve s3 file
+dfpd = extractor.extract_from_s3(bucket,key,s3Type)
+#print(dfpd.head())
+print(dfpd.shape)
+#dfpd.to_csv('products.csv', index=False)
+
+#cleaning product details
+dfpd = cleaning.convert_product_weights(dfpd)
+
+print(dfpd.shape)
+
+#upload product data
+dbconnector.upload_to_db(dfpd, "dim_products")
+
+# Get product orders
+dfpo = extractor.read_rds_table(dbconnector, "orders_table")
+
+print(dfpo.shape)
+#print(dfpo.head())
+
+#cleaning product orders
+dfpo = cleaning.clean_orders_data(dfpo)
+
+print(dfpo.head())
+
+#upload orders
+dbconnector.upload_to_db(dfpo, "orders_table")
+
+#Get date events data
+s3Type = "json"
+bucket = "data-handling-public"
+key = "date_details.json"
+#link = "https://data-handling-public.s3.eu-west-1.amazonaws.com/date_details.json"
+dfde = extractor.extract_from_s3(bucket,key,s3Type)
+
+print(dfde.shape)
+#print(dfde.head())
+
+#dfde.to_csv('events.csv', index=False)
+
+#cleaning date events data
+dfde = cleaning.clean_date_events(dfde)
+
+#upload date events data
+dbconnector.upload_to_db(dfde, "dim_date_times")
