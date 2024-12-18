@@ -106,7 +106,7 @@ retrieve = "https://aqj7u5id95.execute-api.eu-west-1.amazonaws.com/prod/store_de
 dfsd = extractor.retrieve_stores_data(retrieve, stores["number_stores"])
 
 # Clean Stores data
-dfsd = cleaning.called_clean_store_data(dfsd)
+dfsd = cleaning.clean_store_data(dfsd)
 
 #dfsd.to_csv('stores.csv', index=False)
 
@@ -152,13 +152,8 @@ dbconnector.upload_to_db(dfpo, "orders_table")
 s3Type = "json"
 bucket = "data-handling-public"
 key = "date_details.json"
-#link = "https://data-handling-public.s3.eu-west-1.amazonaws.com/date_details.json"
 dfde = extractor.extract_from_s3(bucket,key,s3Type)
 
-print(dfde.shape)
-#print(dfde.head())
-
-#dfde.to_csv('events.csv', index=False)
 
 #cleaning date events data
 dfde = cleaning.clean_date_events(dfde)

@@ -26,18 +26,10 @@ class DatabaseConnector():
             # Create and return the SQLAlchemy engine
         dbEngine = create_engine(db_url)
 
-        # try:
-        #     with dbEngine.connect() as connection:
-        #         print("Database connection successful")
-        # except Exception as e:
-        #     print(f"Database connection failed: {e}")
-
         return dbEngine
 
     def list_db_tables(self):
-        #Alternatively, SQLAlchemy's ORM layer has a metadata reflection feature to load table information automatically:
-        #Metadata Reflection: Use MetaData.reflect to retrieve information about all tables in the database.
-        #Table Names: The metadata.tables dictionary contains all table names as keys.
+
         metadata = MetaData()
         metadata.reflect(bind=self.engine)
         tables = metadata.tables.keys()
@@ -47,7 +39,7 @@ class DatabaseConnector():
         return tables
     
     def upload_to_db(self, df, tableName):
-        # Define your connection details
+        # Connection details
         DATABASE_TYPE = 'postgresql'
         DBAPI = 'psycopg2'
         HOST = 'localhost'
@@ -70,9 +62,3 @@ class DatabaseConnector():
 if __name__ == '__main__':
     
     connect = DatabaseConnector('db_creds.yaml')
-
-#try:
-#    with dbEngine.connect() as connection:
-#        print("Database connection successful!")
-#except Exception as e:
-#d    print(f"Database connection failed: {e}")

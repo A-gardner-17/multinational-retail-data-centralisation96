@@ -47,7 +47,7 @@ class  DataCleaning():
 
         return dfs
     
-    def called_clean_store_data(self,dfsd):
+    def clean_store_data(self,dfsd):
         #find and remove null values
 
         #find nulls
