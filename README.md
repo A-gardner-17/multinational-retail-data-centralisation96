@@ -39,20 +39,20 @@ The project can be tested using the XXXXXXXX.py
 **database_utils.py** DatabaseConnector Class which initialises fileName, database credentials loaded from a local yaml file (read_db_creds), connection to the RDS database (init_db_engine) and list of tables included in the database (list_db_tables). The upload_to_db function connects to the local database and creates the various tables updating each with the cleaned data from the various dataframes.
 
 **data_extraction.py** DataExtractor Class this contains the following methods:
-1. read_rds_table: accepts the connection details for the RDS database and table name and reads the related table from the database into a Pandas DataFrame.
-2. retrieve_pdf_data: accepts the path for a PDF file and reads in the data into a Pandass DataFrame.
-3. list_number_of_stores: API. Accepts the the number of stores endpoint and header dictionary and returns the number of stores to extract.
-4. retrieve_stores_data: API. Accepts the store endpoint and the total number of stores (returned from list_number_of_stores). Extracts data for each store and appends detail to a list before converting to a Pandas DataFrame and returning.
-5. extract_from_s3: S3 bucket on AWS - extracts CSV file for product details and JSON file for date events data. In both cases reading and returning a Pandas DataFrame.
+1. **read_rds_table**: accepts the connection details for the RDS database and table name and reads the related table from the database into a Pandas DataFrame.
+2. **retrieve_pdf_data**: accepts the path for a PDF file and reads in the data into a Pandass DataFrame.
+3. **list_number_of_stores**: API. Accepts the the number of stores endpoint and header dictionary and returns the number of stores to extract.
+4. **retrieve_stores_data**: API. Accepts the store endpoint and the total number of stores (returned from list_number_of_stores). Extracts data for each store and appends detail to a list before converting to a Pandas DataFrame and returning.
+5. **extract_from_s3**: S3 bucket on AWS - extracts CSV file for product details and JSON file for date events data. In both cases reading and returning a Pandas DataFrame.
 
 **data_cleaning.py** DataCleaning Class this contains the following methods:
-1. clean_user_data: accepts the user DataFrame. Removes NULL values and converts the join_date column in to a datetime data type. Returns the cleaned dataset.
-2. clean_card_data: accepts the card details DataFrame. Removes NULL values, removes duplicate card numbers, removes non-numerical card numbers and converts the date_payment_confirmed column in to a datetime data type. Returns the cleaned dataset.
-3. clean_store_data: accepts the store DataFrame. Removes NULL values, converts the opening_date in to a datetime data type, strips away symbols, letters, and white spaces from staff_number column. Returns the cleaned dataset.
-4. convert_product_weights: accepts the product details DataFrame. Removes NULL values and calls the convert_to_kg method. Returns the cleaned dataset.
-5. convert_to_kg: accepts the individual weight values and converts each into kg. Returns the converted weight.
-6. clean_orders_data: accepts the product orders DataFrame. Removes unwanted columns and returns the cleaned dataset.
-7. clean_date_events: accepts the sale details DataFrame. Removes NULL values and convert values in columns "day", "month", and "year" into numeric values. Returns the cleaned dataset.
+1. **clean_user_data**: accepts the user DataFrame. Removes NULL values and converts the join_date column in to a datetime data type. Returns the cleaned dataset.
+2. **clean_card_data**: accepts the card details DataFrame. Removes NULL values, removes duplicate card numbers, removes non-numerical card numbers and converts the date_payment_confirmed column in to a datetime data type. Returns the cleaned dataset.
+3. **clean_store_data**: accepts the store DataFrame. Removes NULL values, converts the opening_date in to a datetime data type, strips away symbols, letters, and white spaces from staff_number column. Returns the cleaned dataset.
+4. **convert_product_weights**: accepts the product details DataFrame. Removes NULL values and calls the convert_to_kg method. Returns the cleaned dataset.
+5. **convert_to_kg**: accepts the individual weight values and converts each into kg. Returns the converted weight.
+6. **clean_orders_data**: accepts the product orders DataFrame. Removes unwanted columns and returns the cleaned dataset.
+7. **clean_date_events**: accepts the sale details DataFrame. Removes NULL values and convert values in columns "day", "month", and "year" into numeric values. Returns the cleaned dataset.
 
 # License Information
 This program has been developed as part of the AiCore training programme.
