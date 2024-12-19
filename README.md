@@ -40,7 +40,7 @@ The project can be tested using the XXXXXXXX.py
 
 **data_extraction.py** DataExtractor Class this contains the following methods:
 1. **read_rds_table**: accepts the connection details for the RDS database and table name and reads the related table from the database into a Pandas DataFrame.
-2. **retrieve_pdf_data**: accepts the path for a PDF file and reads in the data into a Pandass DataFrame.
+2. **retrieve_pdf_data**: accepts the path for a PDF file and reads in the data into a Pandas DataFrame.
 3. **list_number_of_stores**: API. Accepts the the number of stores endpoint and header dictionary and returns the number of stores to extract.
 4. **retrieve_stores_data**: API. Accepts the store endpoint and the total number of stores (returned from list_number_of_stores). Extracts data for each store and appends detail to a list before converting to a Pandas DataFrame and returning.
 5. **extract_from_s3**: S3 bucket on AWS - extracts CSV file for product details and JSON file for date events data. In both cases reading and returning a Pandas DataFrame.
