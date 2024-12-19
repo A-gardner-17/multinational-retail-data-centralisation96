@@ -33,7 +33,7 @@ XXX complete other aspects here
 The project uses the standard Python installation.
 
 # Usage Instructions
-The project can be tested using the XXXXXXXX.py
+The project can be tested using the main.py
 
 # File Structure of the Project
 **database_utils.py** DatabaseConnector Class which initialises fileName, database credentials loaded from a local yaml file (read_db_creds), connection to the RDS database (init_db_engine) and list of tables included in the database (list_db_tables). The upload_to_db function connects to the local database and creates the various tables updating each with the cleaned data from the various dataframes.
