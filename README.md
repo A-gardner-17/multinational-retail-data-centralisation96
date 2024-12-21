@@ -27,7 +27,7 @@ For each of the extracted DataFrames the data was cleaned using the cleaning req
 
 Once each cleaning process was complete for each dataset the number of rows were checked and the data was uploaded to the specified tables in the PostgreSQL database.
 
-XXX complete other aspects here
+Once all the tables had been uploaded the next step involved changing the data types of the columns in each of the tables. This was completed by running SQL statements, including finding the maximum length of fields and setting appropriate data types. After these updates the primary keys were set in the tables with a dim prefix and then the foreign keys were set in the orders_table. A number of issues were found during this process which required a revisit to some of the cleaning methods, in particular with data cleaning and a new method specifically for the cleaning of dates was created. There were also issues when setting the foreign key for card_number as there were records in the orders_table that did not exist in the dim_card_details table. This was resolved by updating the cleaning method for the card_details_table.
 
 # Installation Instructions
 The project uses the standard Python installation.
@@ -53,6 +53,10 @@ The project can be tested using the main.py
 5. **convert_to_kg**: accepts the individual weight values and converts each into kg. Returns the converted weight.
 6. **clean_orders_data**: accepts the product orders DataFrame. Removes unwanted columns and returns the cleaned dataset.
 7. **clean_date_events**: accepts the sale details DataFrame. Removes NULL values and convert values in columns "day", "month", and "year" into numeric values. Returns the cleaned dataset.
+8. **date_checking**: accepts individual dates and converts into datetime data type. Returns the convered data.
+
+**milestone3_1 - milestone3_9.py**
+SQL Statements to set datatypes for columns in each table plus the setting of primary and foreign key fields.
 
 # License Information
 This program has been developed as part of the AiCore training programme.

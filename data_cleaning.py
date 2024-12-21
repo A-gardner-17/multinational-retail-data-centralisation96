@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 class  DataCleaning():
     def __init__(self):
@@ -28,8 +29,8 @@ class  DataCleaning():
         # Drop rows where 'country_code' is not in the valid_codes list
         df = df[df['country_code'].isin(valid_codes)]
 
-        # Convert join_date to datetime datatype handling a mix of different date formats
-        df['join_date'] = pd.to_datetime(df['join_date'], format='mixed')
+        # Convert join_date to datetime datatype after checking
+        df['join_date'] = df['join_date'].apply(self.date_checking)
 
         return df
     
@@ -54,17 +55,15 @@ class  DataCleaning():
         dfs = dfs.drop_duplicates(subset=['card_number'])
 
         # Remove non numerical card numbers - need to remove ? first
-        # Convert 'value' to numeric and drop rows with non-numeric values
 
         dfs['card_number'] = dfs['card_number'].apply(str)
         dfs['card_number'] = dfs['card_number'].str.replace('?','')
-        dfs['card_number'] = pd.to_numeric(dfs['card_number'], errors='coerce')
-  
+
+
+        # Convert join_date to datetime datatype after checking
+        dfs['date_payment_confirmed'] = dfs['date_payment_confirmed'].apply(self.date_checking)
+
         dfs.dropna(how='any',inplace= True)
-
-        # Convert join_date to datetime datatype handling a mix of different date formats
-        dfs['date_payment_confirmed'] = pd.to_datetime(dfs['date_payment_confirmed'], format='mixed')
-
         return dfs
     
     def clean_store_data(self,dfsd):
@@ -181,3 +180,27 @@ class  DataCleaning():
 
         return dfde
         
+    def date_checking(self, date):
+        """
+        Method that will check the date formats.
+
+        Args:
+            date (str): Dates in text format.
+
+        Returns:
+            date (date/time): Converted using pd.to_datetime.
+        """
+        try:
+            return pd.to_datetime(date, format='%B %Y %d')  # First format
+        except ValueError:
+            try:
+                return pd.to_datetime(date, format='%Y %B %d')  # Another format
+            except ValueError:
+                try:
+                    return pd.to_datetime(date, format='%Y-%m-%d')  # Another format
+                except ValueError:
+                    try: 
+                        return pd.to_datetime(date, format='%Y/%m/%d')
+                    except ValueError:
+                        return pd.NaT  # Fallback for invalid dates
+

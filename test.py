@@ -11,7 +11,10 @@ PASSWORD = 'kingsley'
 DATABASE = 'sales_data'
 PORT = 5432
 engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
-users = pd.read_sql_table('dim_users', engine)
-users.head(10)
+users = pd.read_sql_table('dim_card_details', engine)
+users.head(1)
 print(users)
+
+#users.to_csv('new_card_details.csv', index=False)
+
 

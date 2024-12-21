@@ -11,7 +11,6 @@ def users():
     #clean users
     df = cleaning.clean_user_data(df)
 
-
     #upload users
     dbconnector.upload_to_db(df, "dim_users")
 

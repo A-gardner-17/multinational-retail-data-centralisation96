@@ -102,6 +102,4 @@ class DatabaseConnector():
         print("DataFrame saved to PostgreSQL", tableName)
         
 
-#if __name__ == '__main__':
-#    
-#    connect = DatabaseConnector('db_creds.yaml')
+
