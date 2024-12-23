@@ -1,7 +1,5 @@
-import yaml
 from sqlalchemy import create_engine, text, MetaData
 import psycopg2
-import pandas as pd
 
 DATABASE_TYPE = 'postgresql'
 DBAPI = 'psycopg2'
@@ -19,37 +17,37 @@ engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{POR
 #    result = conn.execute(query).scalar()
 #    print(f"Maximum length: {result}")
 
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_date_times
-#        ALTER COLUMN month TYPE VARCHAR(2);
-#    """))
-#    conn.commit()
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_date_times
+        ALTER COLUMN month TYPE VARCHAR(2);
+    """))
+    conn.commit()
 
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_date_times
-#        ALTER COLUMN year TYPE VARCHAR(4);
-#    """))
-#    conn.commit()
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_date_times
+        ALTER COLUMN year TYPE VARCHAR(4);
+    """))
+    conn.commit()
 
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_date_times
-#        ALTER COLUMN day TYPE VARCHAR(2);
-#    """))
-#    conn.commit()
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_date_times
+        ALTER COLUMN day TYPE VARCHAR(2);
+    """))
+    conn.commit()
 
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_date_times
-#        ALTER COLUMN time_period TYPE VARCHAR(10);
-#    """))
-#    conn.commit()
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_date_times
+        ALTER COLUMN time_period TYPE VARCHAR(10);
+    """))
+    conn.commit()
 
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_date_times
-#        ALTER COLUMN date_uuid TYPE UUID USING date_uuid::UUID;
-#    """))
-#    conn.commit()
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_date_times
+        ALTER COLUMN date_uuid TYPE UUID USING date_uuid::UUID;
+    """))
+    conn.commit()

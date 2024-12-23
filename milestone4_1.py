@@ -11,10 +11,12 @@ PASSWORD = 'kingsley'
 DATABASE = 'sales_data'
 PORT = 5432
 engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
-users = pd.read_sql_table('dim_store_details', engine)
-users.head(1)
-print(users)
 
-users.to_csv('new_store_details.csv', index=False)
-
-
+with engine.connect() as conn:
+    result = conn.execute(text("""
+        SELECT country_code, count (*) AS total_no_stores
+        FROM dim_store_details
+        GROUP BY country_code;
+    """))
+    for row in result:
+        print(f"Country Code: {row[0]}, Total Stores: {row[1]}")

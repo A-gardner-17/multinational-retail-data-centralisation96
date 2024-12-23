@@ -1,7 +1,5 @@
-import yaml
 from sqlalchemy import create_engine, text, MetaData
 import psycopg2
-import pandas as pd
 
 DATABASE_TYPE = 'postgresql'
 DBAPI = 'psycopg2'
@@ -19,12 +17,12 @@ engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{POR
 #    result = conn.execute(query).scalar()
 #    print(f"Maximum length: {result}")
 
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_card_details
-#        ALTER COLUMN card_number TYPE VARCHAR(19);
-#    """))
-#    conn.commit()
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_card_details
+        ALTER COLUMN card_number TYPE VARCHAR(19);
+    """))
+    conn.commit()
 
 ## Resolve issue with casting
 ##with engine.connect() as conn:
@@ -34,17 +32,16 @@ engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{POR
 ##    """))
 ##    conn.commit()
 
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_card_details
+        ALTER COLUMN expiry_date TYPE VARCHAR(5);
+    """))
+    conn.commit()
 
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_card_details
-#        ALTER COLUMN expiry_date TYPE VARCHAR(5);
-#    """))
-#    conn.commit()
-
-#with engine.connect() as conn:
-#    conn.execute(text("""
-#        ALTER TABLE dim_card_details
-#        ALTER COLUMN date_payment_confirmed TYPE DATE USING date_payment_confirmed::date;
-#    """))
-#    conn.commit()
+with engine.connect() as conn:
+    conn.execute(text("""
+        ALTER TABLE dim_card_details
+        ALTER COLUMN date_payment_confirmed TYPE DATE USING date_payment_confirmed::date;
+    """))
+    conn.commit()
