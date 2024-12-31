@@ -72,6 +72,33 @@ SQL Statements to set datatypes for columns in each table plus the setting of pr
 
 >     print(f"Maximum length: {result}")
 
+2. **milestone3_2.py**: Casting for the dim_users table.
+3. **milestone3_3.py**: Casting for the dim_store_details table.
+4. **milestone3_4.py**: Cleaning of the dim_products table. This included removal of the £ sign:
+
+> UPDATE dim_products SET product_price = REPLACE(product_price, '£', '')
+
+Adding of a new column called weight_class:
+
+> ALTER TABLE dim_products ADD COLUMN weight_class VARCHAR(14)
+
+Then populate this new column based on the weight range:
+
+> UPDATE dim_products
+        SET weight_class = CASE
+            WHEN weight < 2 THEN 'Light'
+            WHEN weight < 40 THEN 'Mid_Sized'
+            WHEN weight < 140 THEN 'Heavy'
+            WHEN weight >= 140 THEN 'Truck_Required'
+            ELSE 'NULL'
+        END
+        
+5. **milestone3_5.py**: Casting for the dim_products table.
+6. **milestone3_6.py**: Casting for the dim_date_times table.
+7. **milestone3_7.py**: Casting for the dim_card_details table.
+8. **milestone3_8.py**: Creation of primary keys.
+9. **milestone3_9.py**: Creation of foreign keys in the orders_table.
+
 # File Structure of the Project Milestone 4
 
 # License Information
