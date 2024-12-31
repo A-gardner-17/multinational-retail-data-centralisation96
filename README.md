@@ -308,5 +308,40 @@ Total Sales: 1109909.59, Store Type: Local, Country Code: DE
         GROUP BY EXTRACT(YEAR FROM timestamp_column)
         ORDER BY average_difference_in_seconds DESC;
 
+Output:  
+Year: 2013, Hours: 2, Minutes: 17, Seconds: 15, Milliseconds: 65  
+Year: 1993, Hours: 2, Minutes: 15, Seconds: 40, Milliseconds: 12  
+Year: 2002, Hours: 2, Minutes: 13, Seconds: 49, Milliseconds: 47  
+Year: 2008, Hours: 2, Minutes: 13, Seconds: 3, Milliseconds: 53  
+Year: 2022, Hours: 2, Minutes: 13, Seconds: 2, Milliseconds: 0  
+Year: 1995, Hours: 2, Minutes: 12, Seconds: 59, Milliseconds: 8  
+Year: 2016, Hours: 2, Minutes: 12, Seconds: 58, Milliseconds: 9  
+Year: 2011, Hours: 2, Minutes: 12, Seconds: 29, Milliseconds: 82  
+Year: 2020, Hours: 2, Minutes: 12, Seconds: 10, Milliseconds: 51  
+Year: 2021, Hours: 2, Minutes: 11, Seconds: 48, Milliseconds: 37  
+Year: 2012, Hours: 2, Minutes: 11, Seconds: 46, Milliseconds: 26  
+Year: 2009, Hours: 2, Minutes: 11, Seconds: 24, Milliseconds: 80  
+Year: 1996, Hours: 2, Minutes: 11, Seconds: 11, Milliseconds: 38  
+Year: 2007, Hours: 2, Minutes: 11, Seconds: 7, Milliseconds: 99  
+Year: 2010, Hours: 2, Minutes: 11, Seconds: 7, Milliseconds: 60  
+Year: 1999, Hours: 2, Minutes: 11, Seconds: 4, Milliseconds: 35  
+Year: 2000, Hours: 2, Minutes: 11, Seconds: 0, Milliseconds: 14  
+Year: 2019, Hours: 2, Minutes: 10, Seconds: 45, Milliseconds: 12  
+Year: 2001, Hours: 2, Minutes: 10, Seconds: 44, Milliseconds: 33  
+Year: 2018, Hours: 2, Minutes: 10, Seconds: 43, Milliseconds: 59  
+Year: 1994, Hours: 2, Minutes: 10, Seconds: 37, Milliseconds: 97  
+Year: 2004, Hours: 2, Minutes: 10, Seconds: 29, Milliseconds: 23  
+Year: 2006, Hours: 2, Minutes: 10, Seconds: 15, Milliseconds: 65  
+Year: 2014, Hours: 2, Minutes: 10, Seconds: 6, Milliseconds: 6  
+Year: 1997, Hours: 2, Minutes: 9, Seconds: 48, Milliseconds: 34  
+Year: 2015, Hours: 2, Minutes: 9, Seconds: 44, Milliseconds: 44  
+Year: 1992, Hours: 2, Minutes: 9, Seconds: 36, Milliseconds: 14  
+Year: 2005, Hours: 2, Minutes: 9, Seconds: 4, Milliseconds: 84  
+Year: 2003, Hours: 2, Minutes: 8, Seconds: 39, Milliseconds: 43  
+Year: 2017, Hours: 2, Minutes: 8, Seconds: 38, Milliseconds: 18  
+Year: 1998, Hours: 2, Minutes: 8, Seconds: 8, Milliseconds: 0  
+
+
+
 # License Information
 This program has been developed as part of the AiCore training programme.
