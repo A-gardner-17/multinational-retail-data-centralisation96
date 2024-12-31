@@ -137,10 +137,10 @@ GB has one additional store as it includes the web portal record. The SQL was up
         WHERE store_type != 'Web Portal'
         GROUP BY country_code;
 
-Output:
-Country Code: DE, Total Stores: 141
-Country Code: US, Total Stores: 34
-Country Code: GB, Total Stores: 265
+Output:  
+Country Code: DE, Total Stores: 141  
+Country Code: US, Total Stores: 34  
+Country Code: GB, Total Stores: 265  
 
 2. **milestone4_2.py**: Which locations currently have the most stores:
 
@@ -150,14 +150,14 @@ GROUP BY locality
 HAVING COUNT(*) >= 10
 ORDER BY total_no_stores DESC;
 
-Output:
-Country Code: Chapletown, Total Stores: 14
-Country Code: Belper, Total Stores: 13
-Country Code: Bushey, Total Stores: 12
-Country Code: Exeter, Total Stores: 11
-Country Code: Arbroath, Total Stores: 10
-Country Code: High Wycombe, Total Stores: 10
-Country Code: Rutherglen, Total Stores: 10
+Output:  
+Country Code: Chapletown, Total Stores: 14  
+Country Code: Belper, Total Stores: 13  
+Country Code: Bushey, Total Stores: 12  
+Country Code: Exeter, Total Stores: 11  
+Country Code: Arbroath, Total Stores: 10  
+Country Code: High Wycombe, Total Stores: 10  
+Country Code: Rutherglen, Total Stores: 10  
 
 3. **milestone4_3.py**:
 4. **milestone4_4.py**:
