@@ -199,9 +199,63 @@ Output:
 Number of Sales: 93166, Product Quantity Count: 374047, Location: Offline  
 Number of Sales: 26957, Product Quantity Count: 107739, Location: Web  
 
-5. **milestone4_5.py**:
-6. **milestone4_6.py**:
-7. **milestone4_7.py**:
+5. **milestone4_5.py**: total revenue coming from each of the different store types and the number of sales made as a percentage:
+
+> SELECT dim_store_details.store_type, sum(orders_table.product_quantity * dim_products.product_price) AS total_sales,
+        ROUND((SUM(orders_table.product_quantity * dim_products.product_price) * 100.0) / 
+        SUM(SUM(orders_table.product_quantity * dim_products.product_price)) OVER (), 2) 
+FROM orders_table
+JOIN dim_products ON orders_table.product_code = dim_products.product_code
+JOIN dim_store_details ON dim_store_details.store_code = orders_table.store_code
+GROUP BY dim_store_details.store_type
+ORDER BY total_sales DESC;
+
+Output:  
+Store Type: Local, Total Sales: 3440896.52, Sales Made %: 44.56  
+Store Type: Web Portal, Total Sales: 1726547.05, Sales Made %: 22.36  
+Store Type: Super Store, Total Sales: 1224293.65, Sales Made %: 15.85  
+Store Type: Mall Kiosk, Total Sales: 698791.61, Sales Made %: 9.05  
+Store Type: Outlet, Total Sales: 631804.81, Sales Made %: 8.18  
+
+The output for this task was not the same as shown on the task requirements, however by looking at the data it appeared that the values above were accurate.
+
+6. **milestone4_6.py**: Which months in which years have had the most sales historically:
+
+> SELECT dim_date_times.year, dim_date_times.month, sum(orders_table.product_quantity * dim_products.product_price) AS total_sales 
+FROM orders_table
+JOIN dim_products ON orders_table.product_code = dim_products.product_code
+JOIN dim_date_times ON dim_date_times.date_uuid = orders_table.date_uuid
+GROUP BY dim_date_times.year, dim_date_times.month
+ORDER BY total_sales DESC
+LIMIT 10;
+
+Output:  
+Total Sales: 27936.77, Year: 1994, Month: 3  
+Total Sales: 27356.14, Year: 2019, Month: 1  
+Total Sales: 27091.67, Year: 2009, Month: 8  
+Total Sales: 26679.98, Year: 1997, Month: 11  
+Total Sales: 26310.97, Year: 2018, Month: 12  
+Total Sales: 26277.72, Year: 2019, Month: 8  
+Total Sales: 26236.67, Year: 2017, Month: 9  
+Total Sales: 25798.12, Year: 2010, Month: 5  
+Total Sales: 25648.29, Year: 1996, Month: 8  
+Total Sales: 25614.54, Year: 2000, Month: 1  
+
+7. **milestone4_7.py**: Overall staff numbers in each location around the world:
+
+> SELECT dim_store_details.country_code, count(dim_users.user_uuid) AS total_staff_number                   
+FROM (SELECT DISTINCT country_code FROM dim_store_details) dim_store_details
+JOIN dim_users ON dim_store_details.country_code = dim_users.country_code
+GROUP BY dim_store_details.country_code
+ORDER BY total_staff_number DESC;
+
+Output:  
+Total Staff Numbers: 9365, Country Code: GB  
+Total Staff Numbers: 4708, Country Code: DE  
+Total Staff Numbers: 1205, Country Code: US  
+
+The output here again does not match the requirements however after examining the data it does appear to be correct.
+
 8. **milestone4_8.py**:
 9. **milestone4_9.py**:
 
