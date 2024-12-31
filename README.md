@@ -11,11 +11,13 @@ The central database will be used to get up-to-date metrics for the business.
 
 As part of this project I set up a GitHub repo, set up a new database to hold the cleaned data in using PostgreSQL, set up three Python scripts to extract different data sources, clean the data extracted and connect and upload data to the database. Details of these scripts can be found below.
 
+Milestone 3 involved creating the database schema, updating data types and making sure all the table relationships were set up with the appropriate primary and foreign keys. Details of this can be accessed from the **File Structure of the Project - Milestone 3** from the contents.
+
 # Table of Contents
  1. [Project Description](#project-description)
  2. [Installation Instructions](#installation-instructions)
  3. [Usage Instructions](#usage-instructions)
- 4. [File Structure of the Project](#file-structure-of-the-project)
+ 4. [File Structure of the Project - Milestone 2](#file-structure-of-the-project-milestone-2)
  5. [License Information](#license-information)
 
 # Project Description
@@ -35,7 +37,7 @@ The project uses the standard Python installation.
 # Usage Instructions
 The project can be tested using the main.py
 
-# File Structure of the Project
+# File Structure of the Project Milestone 2
 **database_utils.py** DatabaseConnector Class which initialises fileName, database credentials loaded from a local yaml file (read_db_creds), connection to the RDS database (init_db_engine) and list of tables included in the database (list_db_tables). The upload_to_db function connects to the local database and creates the various tables updating each with the cleaned data from the various dataframes.
 
 **data_extraction.py** DataExtractor Class this contains the following methods:
