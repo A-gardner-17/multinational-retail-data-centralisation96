@@ -272,7 +272,7 @@ Total Sales: 247634.20, Store Type: Mall Kiosk, Country Code: DE
 Total Sales: 384625.03, Store Type: Super Store, Country Code: DE  
 Total Sales: 1109909.59, Store Type: Local, Country Code: DE  
 
-9. **milestone4_9.py**: How quickly the company is making sales - this task was split into separate parts.
+9. **milestone4_9.py**: How quickly the company is making sales - this task was split into separate parts.  
     a. Add new column to hold the time stamp  
 
     > ALTER TABLE dim_date_times
@@ -287,8 +287,26 @@ Total Sales: 1109909.59, Store Type: Local, Country Code: DE
     c. Add new column to hold the time difference as INTERVAL 
 
     >  ALTER TABLE dim_date_times ADD COLUMN difference INTERVAL;
-    
+
+    d. Work at the interval and save to the new column
+
+    > WITH calculated_differences AS (
+            SELECT date_uuid, LEAD(timestamp_column) OVER (ORDER BY timestamp_column) - timestamp_column AS difference
+        FROM 
+            dim_date_times
+        )
+    UPDATE dim_date_times
+    SET difference = calculated_differences.difference
+    FROM calculated_differences
+    WHERE dim_date_times.date_uuid = calculated_differences.date_uuid;
+
     d. Calculate the averages grouped by year  
+
+    > SELECT EXTRACT(YEAR FROM timestamp_column) AS year, AVG(EXTRACT(EPOCH FROM difference)) AS average_difference_in_seconds
+        FROM dim_date_times
+        WHERE difference IS NOT NULL
+        GROUP BY EXTRACT(YEAR FROM timestamp_column)
+        ORDER BY average_difference_in_seconds DESC;
 
 # License Information
 This program has been developed as part of the AiCore training programme.
