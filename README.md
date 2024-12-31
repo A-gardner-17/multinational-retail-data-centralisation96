@@ -18,7 +18,9 @@ Milestone 3 involved creating the database schema, updating data types and makin
  2. [Installation Instructions](#installation-instructions)
  3. [Usage Instructions](#usage-instructions)
  4. [File Structure of the Project - Milestone 2](#file-structure-of-the-project-milestone-2)
- 5. [License Information](#license-information)
+ 5. [File Structure of the Project - Milestone 3](#file-structure-of-the-project-milestone-3)
+ 6. [File Structure of the Project - Milestone 4](#file-structure-of-the-project-milestone-4)
+ 7. [License Information](#license-information)
 
 # Project Description
 This project focuses on the extraction of data from a variety of data sources, including an AWS database in the cloud, a PDF document in an AWS S3 bucket, extraction of data using an API, a CSV and JSON file in an AWS S3 bucket.
@@ -57,8 +59,11 @@ The project can be tested using the main.py
 7. **clean_date_events**: accepts the sale details DataFrame. Removes NULL values and convert values in columns "day", "month", and "year" into numeric values. Returns the cleaned dataset.
 8. **date_checking**: accepts individual dates and converts into datetime data type. Returns the convered data.
 
+# File Structure of the Project Milestone 3
 **milestone3_1 - milestone3_9.py**
 SQL Statements to set datatypes for columns in each table plus the setting of primary and foreign key fields.
+
+# File Structure of the Project Milestone 4
 
 # License Information
 This program has been developed as part of the AiCore training programme.
