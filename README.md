@@ -65,8 +65,11 @@ SQL Statements to set datatypes for columns in each table plus the setting of pr
 1. **milestone3_1.py**: Casting for the orders_table. This required finding out the maximum length of some columns. This was achieved using the following and was used across a number of different columns in different tables:
 
 > query = text("SELECT MAX(LENGTH(card_number::TEXT)) AS max_length FROM orders_table")
+
 > with engine.connect() as conn:
+
 >     result = conn.execute(query).scalar()
+
 >     print(f"Maximum length: {result}")
 
 # File Structure of the Project Milestone 4
