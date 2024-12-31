@@ -13,7 +13,7 @@ As part of this project I set up a GitHub repo, set up a new database to hold th
 
 Milestone 3 involved creating the database schema, updating data types and making sure all the table relationships were set up with the appropriate primary and foreign keys. Details of this can be accessed from the **File Structure of the Project - Milestone 3** from the contents.
 
-Milestone 4 involved using the finalised database and creating SQL queries to extract useful data. Detilas of this can be accessed from the **File Structure of the Project - Milestone 4** from the contents.
+Milestone 4 involved using the finalised database and creating SQL queries to extract useful data. Details of this can be accessed from the **File Structure of the Project - Milestone 4** from the contents.
 
 # Table of Contents
  1. [Project Description](#project-description)
