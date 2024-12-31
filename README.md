@@ -144,10 +144,10 @@ Country Code: GB, Total Stores: 265
 
 2. **milestone4_2.py**: Which locations currently have the most stores:
 
-> SELECT locality, count (*) AS total_no_stores
+> SELECT locality, count (\*) AS total_no_stores
 FROM dim_store_details
 GROUP BY locality
-HAVING COUNT(*) >= 10
+HAVING COUNT(\*) >= 10
 ORDER BY total_no_stores DESC;
 
 Output:  
