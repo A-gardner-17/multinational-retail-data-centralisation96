@@ -92,12 +92,30 @@ Then populate this new column based on the weight range:
             WHEN weight >= 140 THEN 'Truck_Required'
             ELSE 'NULL'
         END
-        
-5. **milestone3_5.py**: Casting for the dim_products table.
+
+5. **milestone3_5.py**: Casting for the dim_products table. The removed column renamed to still_available before changing the data type:
+
+> UPDATE dim_products
+        SET still_available = CASE
+            WHEN still_available = 'Still_avaliable' THEN 'true'
+            ELSE 'false'
+        END
+
 6. **milestone3_6.py**: Casting for the dim_date_times table.
-7. **milestone3_7.py**: Casting for the dim_card_details table.
-8. **milestone3_8.py**: Creation of primary keys.
-9. **milestone3_9.py**: Creation of foreign keys in the orders_table.
+7. **milestone3_7.py**: Casting for the dim_card_details table. To resolve an issue with the casting of the card_number column the following SQL wase executed:
+
+> UPDATE dim_card_details
+       SET card_number = TRIM(TO_CHAR(CAST(card_number AS NUMERIC), '9999999999999999999999'))
+
+8. **milestone3_8.py**: Creation of primary keys. The various primary keys were set using the format shown below:
+
+> ALTER TABLE dim_date_times
+        ADD CONSTRAINT pk_date_times PRIMARY KEY (date_uuid)
+
+9. **milestone3_9.py**: Creation of foreign keys in the orders_table. The foreign keys were set using the format shown below:
+
+> ALTER TABLE orders_table
+        ADD CONSTRAINT fk_users FOREIGN KEY (user_uuid) REFERENCES dim_users(user_uuid)
 
 # File Structure of the Project Milestone 4
 
