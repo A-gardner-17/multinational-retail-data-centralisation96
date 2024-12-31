@@ -273,12 +273,22 @@ Total Sales: 384625.03, Store Type: Super Store, Country Code: DE
 Total Sales: 1109909.59, Store Type: Local, Country Code: DE  
 
 9. **milestone4_9.py**: How quickly the company is making sales - this task was split into separate parts.
-    a. Add new column to hold the time stamp
+    a. Add new column to hold the time stamp  
+
     > ALTER TABLE dim_date_times
         ADD COLUMN timestamp_column TIMESTAMP;
-    b. Generate the timestamp and update the column
-    c. Add new column to hold the time difference as INTERVAL
-    d. Calculate the averages grouped by year
+
+    b. Generate the timestamp and update the column  
+
+    > UPDATE dim_date_times SET timestamp_column = CAST(
+        year || '-' || LPAD(month, 2, '0') || '-' || LPAD(day, 2, '0') || ' ' || timestamp 
+        AS TIMESTAMP);
+
+    c. Add new column to hold the time difference as INTERVAL 
+
+    >  ALTER TABLE dim_date_times ADD COLUMN difference INTERVAL;
+    
+    d. Calculate the averages grouped by year  
 
 # License Information
 This program has been developed as part of the AiCore training programme.
