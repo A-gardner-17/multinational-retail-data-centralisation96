@@ -102,7 +102,7 @@ Then populate this new column based on the weight range:
         END
 
 6. **milestone3_6.py**: Casting for the dim_date_times table.
-7. **milestone3_7.py**: Casting for the dim_card_details table. To resolve an issue with the casting of the card_number column the following SQL wase executed:
+7. **milestone3_7.py**: Casting for the dim_card_details table. To resolve an issue with the casting of the card_number column the following SQL was executed:
 
 > UPDATE dim_card_details
        SET card_number = TRIM(TO_CHAR(CAST(card_number AS NUMERIC), '9999999999999999999999'))
