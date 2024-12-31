@@ -256,8 +256,29 @@ Total Staff Numbers: 1205, Country Code: US
 
 The output here again does not match the requirements however after examining the data it does appear to be correct.
 
-8. **milestone4_8.py**:
-9. **milestone4_9.py**:
+8. **milestone4_8.py**: Which type of store is generating the most sales in Germany:
+
+> SELECT dim_store_details.store_type, dim_store_details.country_code, sum(orders_table.product_quantity * dim_products.product_price) AS total_sales
+FROM orders_table
+JOIN dim_products ON orders_table.product_code = dim_products.product_code
+JOIN dim_store_details ON dim_store_details.store_code = orders_table.store_code
+WHERE dim_store_details.country_code = 'DE'
+GROUP BY dim_store_details.country_code, dim_store_details.store_type
+ORDER BY total_sales;
+
+Output:  
+Total Sales: 198373.57, Store Type: Outlet, Country Code: DE  
+Total Sales: 247634.20, Store Type: Mall Kiosk, Country Code: DE  
+Total Sales: 384625.03, Store Type: Super Store, Country Code: DE  
+Total Sales: 1109909.59, Store Type: Local, Country Code: DE  
+
+9. **milestone4_9.py**: How quickly the company is making sales - this task was split into separate parts.
+    a. Add new column to hold the time stamp
+    > ALTER TABLE dim_date_times
+        ADD COLUMN timestamp_column TIMESTAMP;
+    b. Generate the timestamp and update the column
+    c. Add new column to hold the time difference as INTERVAL
+    d. Calculate the averages grouped by year
 
 # License Information
 This program has been developed as part of the AiCore training programme.
