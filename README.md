@@ -182,7 +182,23 @@ Month: 11, Total Sales: 630757.08
 Month: 4, Total Sales: 630022.77  
 Month: 2, Total Sales: 616452.99  
 
-4. **milestone4_4.py**:
+4. **milestone4_4.py**: how many sales are happening online vs offline:
+
+> SELECT 
+CASE 
+    WHEN dim_store_details.store_type = 'Web Portal' THEN 'Web'
+    ELSE 'Offline'
+END AS location,
+COUNT(orders_table.index) AS number_of_sales,
+SUM(orders_table.product_quantity) AS product_quantity_count
+FROM orders_table
+JOIN dim_store_details ON dim_store_details.store_code = orders_table.store_code
+GROUP BY location;
+
+Output:  
+Number of Sales: 93166, Product Quantity Count: 374047, Location: Offline  
+Number of Sales: 26957, Product Quantity Count: 107739, Location: Web  
+
 5. **milestone4_5.py**:
 6. **milestone4_6.py**:
 7. **milestone4_7.py**:
