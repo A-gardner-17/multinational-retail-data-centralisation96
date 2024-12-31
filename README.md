@@ -125,10 +125,10 @@ Once the database structure was finalised a number of queries were run the detai
 FROM dim_store_details
 GROUP BY country_code;
 
-Output:
-Country Code: DE, Total Stores: 141
-Country Code: US, Total Stores: 34
-Country Code: GB, Total Stores: 266
+Output:  
+Country Code: DE, Total Stores: 141  
+Country Code: US, Total Stores: 34  
+Country Code: GB, Total Stores: 266  
 
 GB has one additional store as it includes the web portal record. The SQL was updated as follows:
 
@@ -159,7 +159,29 @@ Country Code: Arbroath, Total Stores: 10
 Country Code: High Wycombe, Total Stores: 10  
 Country Code: Rutherglen, Total Stores: 10  
 
-3. **milestone4_3.py**:
+3. **milestone4_3.py**: Which months have produced the most sales:
+
+> SELECT dim_date_times.month, sum(orders_table.product_quantity * dim_products.product_price) AS total_sales
+FROM orders_table
+JOIN dim_products ON orders_table.product_code = dim_products.product_code
+JOIN dim_date_times ON orders_table.date_uuid = dim_date_times.date_uuid
+GROUP BY dim_date_times.month
+ORDER BY total_sales DESC;
+
+Output:  
+Month: 8, Total Sales: 673295.68  
+Month: 1, Total Sales: 668041.45  
+Month: 10, Total Sales: 657335.84  
+Month: 5, Total Sales: 650321.43  
+Month: 7, Total Sales: 645741.70  
+Month: 3, Total Sales: 645463.00  
+Month: 6, Total Sales: 635578.99  
+Month: 12, Total Sales: 635329.09  
+Month: 9, Total Sales: 633993.62  
+Month: 11, Total Sales: 630757.08  
+Month: 4, Total Sales: 630022.77  
+Month: 2, Total Sales: 616452.99  
+
 4. **milestone4_4.py**:
 5. **milestone4_5.py**:
 6. **milestone4_6.py**:
