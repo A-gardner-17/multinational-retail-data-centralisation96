@@ -118,6 +118,54 @@ Then populate this new column based on the weight range:
         ADD CONSTRAINT fk_users FOREIGN KEY (user_uuid) REFERENCES dim_users(user_uuid)
 
 # File Structure of the Project Milestone 4
+Once the database structure was finalised a number of queries were run the details of which can be seen below (these queries can be found in **milestone4_1.py - milestone4_9.py** and have also been included in the queries folder).
+1. **milestone4_1.py**: Number of stores each country has:
+
+> SELECT country_code, count (*) AS total_no_stores
+FROM dim_store_details
+GROUP BY country_code;
+
+Output:
+Country Code: DE, Total Stores: 141
+Country Code: US, Total Stores: 34
+Country Code: GB, Total Stores: 266
+
+GB has one additional store as it includes the web portal record. The SQL was updated as follows:
+
+> SELECT country_code, count (*) AS total_no_stores
+        FROM dim_store_details
+        WHERE store_type != 'Web Portal'
+        GROUP BY country_code;
+
+Output:
+Country Code: DE, Total Stores: 141
+Country Code: US, Total Stores: 34
+Country Code: GB, Total Stores: 265
+
+2. **milestone4_2.py**: Which locations currently have the most stores:
+
+> SELECT locality, count (*) AS total_no_stores
+FROM dim_store_details
+GROUP BY locality
+HAVING COUNT(*) >= 10
+ORDER BY total_no_stores DESC;
+
+Output:
+Country Code: Chapletown, Total Stores: 14
+Country Code: Belper, Total Stores: 13
+Country Code: Bushey, Total Stores: 12
+Country Code: Exeter, Total Stores: 11
+Country Code: Arbroath, Total Stores: 10
+Country Code: High Wycombe, Total Stores: 10
+Country Code: Rutherglen, Total Stores: 10
+
+3. **milestone4_3.py**:
+4. **milestone4_4.py**:
+5. **milestone4_5.py**:
+6. **milestone4_6.py**:
+7. **milestone4_7.py**:
+8. **milestone4_8.py**:
+9. **milestone4_9.py**:
 
 # License Information
 This program has been developed as part of the AiCore training programme.

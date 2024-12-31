@@ -1,7 +1,5 @@
-import yaml
 from sqlalchemy import create_engine, text, MetaData
 import psycopg2
-import pandas as pd
 
 DATABASE_TYPE = 'postgresql'
 DBAPI = 'psycopg2'
@@ -16,6 +14,7 @@ with engine.connect() as conn:
     result = conn.execute(text("""
         SELECT country_code, count (*) AS total_no_stores
         FROM dim_store_details
+        WHERE store_type != 'Web Portal'
         GROUP BY country_code;
     """))
     for row in result:
