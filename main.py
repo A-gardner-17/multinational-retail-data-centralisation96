@@ -79,7 +79,7 @@ def events():
     dfde = cleaning.clean_date_events(dfde)
 
     #upload date events data
-    dbconnector.upload_to_db(dfde, "dim_date_times")
+    dbconnector.upload_to_db(dfde, "dim_date_times_test")
 
 
 if __name__ == '__main__':
@@ -89,9 +89,9 @@ if __name__ == '__main__':
     extractor = DataExtractor()
     cleaning = DataCleaning()
 
-    users()
-    card_details()
-    stores()
-    products()
-    orders()
+    #users()
+    #card_details()
+    #stores()
+    #products()
+    #orders()
     events()

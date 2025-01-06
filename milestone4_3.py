@@ -1,7 +1,5 @@
-import yaml
 from sqlalchemy import create_engine, text, MetaData
 import psycopg2
-import pandas as pd
 
 DATABASE_TYPE = 'postgresql'
 DBAPI = 'psycopg2'

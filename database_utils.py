@@ -70,7 +70,7 @@ class DatabaseConnector():
             print(table)
         return tables
     
-    def upload_to_db(self, df, tableName):
+    def upload_to_db(self, df, tableName, config_file = "db_creds_local.yaml"):
         """
         Uploads a Pandas DataFrame to a PostgreSQL database as a table.
         Establishes a connection to a PostgreSQL database using SQLAlchemy and
@@ -80,16 +80,21 @@ class DatabaseConnector():
         Args:
             df (pandas.DataFrame): The DataFrame to be uploaded to the database.
             tableName (str): The name of the table to be created or replaced in the database.
-
+            config_file (str): Path to the YAML configuration file.
         """
-        # Connection details
-        DATABASE_TYPE = 'postgresql'
-        DBAPI = 'psycopg2'
-        HOST = 'localhost'
-        USER = 'postgres'
-        PASSWORD = 'kingsley'
-        DATABASE = 'sales_data'
-        PORT = 5432
+        # Connection details  
+     
+        with open(config_file, 'r') as file:
+            config = yaml.safe_load(file)
+    
+        DATABASE_TYPE = config['DATABASE_TYPE']
+        DBAPI = config['DBAPI']
+        HOST = config['HOST']
+        USER = config['USER']
+        PASSWORD = config['PASSWORD']
+        DATABASE = config['DATABASE']
+        PORT = config['PORT']
+
         engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
 
         df.to_sql(
@@ -100,6 +105,21 @@ class DatabaseConnector():
         )
 
         print("DataFrame saved to PostgreSQL", tableName)
-        
 
+    def connect_db_local(self,config_file = "db_creds_local.yaml"):
+        # Connection details  
+     
+        with open(config_file, 'r') as file:
+            config = yaml.safe_load(file)
+    
+        DATABASE_TYPE = config['DATABASE_TYPE']
+        DBAPI = config['DBAPI']
+        HOST = config['HOST']
+        USER = config['USER']
+        PASSWORD = config['PASSWORD']
+        DATABASE = config['DATABASE']
+        PORT = config['PORT']
 
+        engine = create_engine(f"{DATABASE_TYPE}+{DBAPI}://{USER}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}")
+
+        return engine

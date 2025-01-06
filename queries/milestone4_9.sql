@@ -1,3 +1,7 @@
+-- Add new column to hold the timestamp
+ALTER TABLE dim_date_times
+        ADD COLUMN timestamp_column TIMESTAMP;
+
 -- Set timestamp column to a valid timestamp
 UPDATE dim_date_times SET timestamp_column = CAST(
         year || '-' || LPAD(month, 2, '0') || '-' || LPAD(day, 2, '0') || ' ' || timestamp 
